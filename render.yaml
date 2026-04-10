@@ -1,0 +1,25 @@
+# Render Blueprint: connect repo → Render auto-creates both services.
+# 1) Deploy API first. 2) Set sakhi-web env VITE_API_URL + VITE_API_BEARER_TOKEN to match API, then redeploy web.
+services:
+  - type: web
+    name: sakhi-api
+    runtime: node
+    region: oregon
+    plan: free
+    rootDir: server
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /health
+
+  - type: web
+    name: sakhi-web
+    runtime: static
+    region: oregon
+    plan: free
+    rootDir: .
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
