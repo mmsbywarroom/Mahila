@@ -1,0 +1,6 @@
+# Same rules as netlify.toml — copied into dist/ so drag-and-drop deploy gets API proxy.
+# EB URL badle to yahan + netlify.toml dono update karo.
+
+/auth    http://mahilasamanrashi-env.eba-7jmtpnaz.us-east-1.elasticbeanstalk.com/auth    200
+/upload  http://mahilasamanrashi-env.eba-7jmtpnaz.us-east-1.elasticbeanstalk.com/upload    200
+/*       /index.html   200

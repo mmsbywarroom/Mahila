@@ -1,0 +1,24 @@
+# Netlify HTTPS → Elastic Beanstalk HTTP (server-side proxy = no mixed-content in browser).
+# Set VITE_API_URL=same-origin in Netlify env; keep local .env as http://localhost:3001.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# API routes must come before the SPA fallback.
+[[redirects]]
+  from = "/auth"
+  to = "http://mahilasamanrashi-env.eba-7jmtpnaz.us-east-1.elasticbeanstalk.com/auth"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/upload"
+  to = "http://mahilasamanrashi-env.eba-7jmtpnaz.us-east-1.elasticbeanstalk.com/upload"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
